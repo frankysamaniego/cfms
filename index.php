@@ -56,7 +56,7 @@
 						<input class="w3-input" type="password"  name="pWord" id="pWord" required>
 					</div>
 					<p>
-						<button class="w3-button w3-section w3-teal w3-ripple"> Log in </button>
+						<button class="w3-button w3-section w3-block w3-teal w3-ripple"> Log in </button>
 					</p>
 				</form>
 			</div>
