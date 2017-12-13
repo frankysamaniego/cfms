@@ -34,6 +34,10 @@
 			border-right:1px solid #f1f1f1;
 			padding-top:20px;
 		}
+		input[type="text"]:focus,input[type="password"]:focus{
+			box-shadow:none !important;
+			border-color:blue;
+		}
 	</style>
 </head>
 <body>
