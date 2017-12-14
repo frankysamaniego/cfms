@@ -53,14 +53,14 @@
 				<form class="w3-container">
 					<div>
 						<label>Username</label>
-						<input class="w3-input" type="text" name="usName" id="usName"  required>
+						<input class="w3-input" type="text" name="usName" id="usName" placeholder="Username"  required>
 					</div>
 					<div>
 						<label>Password</label>
-						<input class="w3-input" type="password"  name="pWord" id="pWord" required>
+						<input class="w3-input" type="password"  name="pWord" id="pWord"  placeholder="Password" required>
 					</div>
 					<p>
-						<button class="w3-button w3-section w3-block w3-teal w3-ripple"> Log in </button>
+						<button class="w3-button w3-section w3-block w3-teal w3-ripple"> Login </button>
 					</p>
 				</form>
 			</div>
