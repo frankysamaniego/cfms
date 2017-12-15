@@ -48,7 +48,7 @@
     <!-- Right-sided navbar links. Hide them on small screens -->
 		<div class="w3-right w3-hide-small">
 			<a href="javascript:void(0);" class="w3-bar-item w3-button">Account Details</a>
-			<a href="javascript:void(0);" class="w3-bar-item w3-button"><i class="fa fa-sign-out fa-fx"></i> Logout</a>
+			<a href="../include/logout.php" class="w3-bar-item w3-button"><i class="fa fa-sign-out fa-fx"></i> Logout</a>
 		</div>
 	</div>
 </div>	

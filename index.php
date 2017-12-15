@@ -1,4 +1,24 @@
 <?php
+	/*
+		user account levels
+			1  = Super Admin
+			2  = Admin
+			3  = Project
+		user status
+			1 = active
+			2 = disabled
+	*/
+	require('include/dbcon.php');
+	//print_r($_SESSION);
+	if($_SESSION['loggedInType'] == 1){
+		header('location:admin/');
+	}else if($_SESSION['loggedInType'] == 2){
+		header('location:admin/');
+	}else if($_SESSION['loggedInType'] == 3){
+		header('location:project/');
+	}else{
+		
+	}
 ?>
 
 
@@ -39,6 +59,7 @@
 			border-color:blue;
 		}
 	</style>
+	<script src="js/actions.js"></script>
 </head>
 <body>
 	<div class="w3-row" id="">
@@ -50,7 +71,8 @@
 				</span>
 			</div>
 			<div class="w3-row-padding w3-text-black inputBoxContainer" >
-				<form class="w3-container">
+				<div id="status"></div>
+				<form class="w3-container" action="javascript:void(0);" onsubmit="return login()">
 					<div>
 						<label>Username</label>
 						<input class="w3-input" type="text" name="usName" id="usName" placeholder="Username"  required>
