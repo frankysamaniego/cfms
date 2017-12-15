@@ -13,7 +13,11 @@ function login(){
 			}else if(this.responseText == '3'){
 				window.open('project','_parent')
 			}else{
-			  document.getElementById("status").innerHTML=this.responseText;
+				document.getElementById("status").innerHTML="<div class='w3-panel w3-red'>"+this.responseText+"</div>";
+				setTimeout(function(){ 
+					document.getElementById("status").innerHTML="";
+					document.getElementById("loginForm").reset();
+					}, 3000);
 			}
 		}
 	}

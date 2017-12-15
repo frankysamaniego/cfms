@@ -72,7 +72,7 @@
 			</div>
 			<div class="w3-row-padding w3-text-black inputBoxContainer" >
 				<div id="status"></div>
-				<form class="w3-container" action="javascript:void(0);" onsubmit="return login()">
+				<form class="w3-container" id="loginForm" action="javascript:void(0);" onsubmit="return login()">
 					<div>
 						<label>Username</label>
 						<input class="w3-input" type="text" name="usName" id="usName" placeholder="Username"  required>
