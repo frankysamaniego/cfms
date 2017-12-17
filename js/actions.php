@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	require("../include/dbcon.php");
 	//PHP FUNCTIONS
 	function getUserInfo($x){

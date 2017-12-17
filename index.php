@@ -10,11 +10,11 @@
 	*/
 	require('include/dbcon.php');
 	//print_r($_SESSION);
-	if($_SESSION['loggedInType'] == 1){
+	if(isset($_SESSION['loggedInType']) == 1){
 		header('location:admin/');
-	}else if($_SESSION['loggedInType'] == 2){
+	}else if(isset($_SESSION['loggedInType']) == 2){
 		header('location:admin/');
-	}else if($_SESSION['loggedInType'] == 3){
+	}else if(isset($_SESSION['loggedInType']) == 3){
 		header('location:project/');
 	}else{
 		
