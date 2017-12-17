@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="../google/fafa.css">	
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery.js"></script>
+	<script src="../js/actions.js"></script>
 	<style>
 		.w3-bar-item:hover{
 			background-color:#afd2d2 !important;
@@ -23,7 +24,7 @@
 		@media only screen and (min-width: 1025px) {
 			/* For screens: higer than 768 px */
 			#left_menu_container{
-				margin:4% 10% 1%;
+				margin:4% 5% 1%;
 			}
 		}
 		@media only screen and (max-width: 768px) {
