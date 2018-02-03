@@ -23,7 +23,7 @@
 					console.log(data);
 					$('#notifRequest').html(data);
 					$('#notifData').prop('value',data);
-					if(data == notifData){
+					if(data == notifData || notifData == ""){
 						//donot play sound
 						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
 					}else{

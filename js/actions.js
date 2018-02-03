@@ -49,3 +49,26 @@ function login(){
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send(data);
 }
+
+
+
+function newRequest(){
+	var itemBrand = document.getElementById("itemBrand").value;
+	var itemType = document.getElementById("itemType").value;
+	var itemPrice = document.getElementById("itemPrice").value;
+	var itemQuantity = document.getElementById("itemQuantity").value;
+	//$('#currentRequestTable').append('<tr><td>'+itemBrand+'</td><td></td></tr>');
+	var xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200) {
+			console.log(this.responseText);
+			window.location.reload();
+		}
+	}
+	var data = "itemBrandRequest="+itemBrand+"&itemTypeRequest="+itemType+"&itemPriceRequest="+itemPrice+"&itemQuantityRequest="+itemQuantity;
+	xhttp.open("POST","../js/actions.php",true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send(data);
+	
+}

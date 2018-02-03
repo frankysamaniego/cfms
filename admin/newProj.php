@@ -36,6 +36,8 @@
 		var startDate = document.getElementById("startDate").value;
 		var endDate = document.getElementById("endDate").value;
 		var projectPass = document.getElementById("projectPass").value;
+		var projectInitBudget = document.getElementById("initBudget").value;
+		var projectCost = document.getElementById("projectCost").value;
 		
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -44,7 +46,7 @@
 			  console.log(this.responseText);
 			}
 		  };
-		  xhttp.open("GET", "process.php?projectCode="+projectCode+"&projectName="+projectName+"&projectLoc="+projectLoc+"&projectInCharge="+projectInCharge+"&startDate="+startDate+"&endDate="+endDate+"&projectPass="+projectPass, true);
+		  xhttp.open("GET", "process.php?projectCode="+projectCode+"&projectName="+projectName+"&projectLoc="+projectLoc+"&projectInCharge="+projectInCharge+"&startDate="+startDate+"&endDate="+endDate+"&projectPass="+projectPass+'&initBudget='+projectInitBudget+'&projectCost='+projectCost, true);
 		  xhttp.send();
 	}
 </script>
@@ -92,6 +94,12 @@
 			<div class="w3-quarter w3-padding"><span class="">Initial Budget</span></div>
 			<div class="w3-rest">
 				<input type="number" class="w3-input w3-border" id="initBudget" required />
+			</div>
+		</div>
+		<div class="w3-row-padding w3-padding-8">
+			<div class="w3-quarter w3-padding"><span class="">Project Cost</span></div>
+			<div class="w3-rest">
+				<input type="number" class="w3-input w3-border" id="projectCost" required />
 			</div>
 		</div>
 		<div class="w3-row-padding w3-padding-8">
