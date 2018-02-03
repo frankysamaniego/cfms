@@ -9,6 +9,31 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery.js"></script>
 	<script src="../js/actions.js"></script>
+    <script>
+    $(document).ready(function(){
+		setInterval(getData,3000);
+	});
+	
+	function getData(){
+		var notifData = $("#notifData").val();
+			$.ajax({
+				url:'getdata.php',
+				type:'get',
+				success:function(data){
+					console.log(data);
+					$('#notifRequest').html(data);
+					$('#notifData').prop('value',data);
+					if(data == notifData){
+						//donot play sound
+						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
+					}else{
+						//play sound
+						document.getElementById("sound").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
+					}
+				}
+			});	
+		}
+    </script>
 	<style>
 		.w3-bar-item:hover{
 			background-color:#afd2d2 !important;
@@ -48,7 +73,7 @@
     <a href="#home" class="w3-bar-item w3-button">&nbsp;</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
 		<div class="w3-right w3-hide-small">
-			<a href="javascript:void(0);" class="w3-bar-item w3-button">Account Details</a>
+			<a href="javascript:void(0);" class="w3-bar-item w3-button">Account Details <span id="notifRequest" class="w3-badge"></span></a>
 			<a href="../include/logout.php" class="w3-bar-item w3-button"><i class="fa fa-sign-out fa-fx"></i> Logout</a>
 		</div>
 	</div>
@@ -67,6 +92,11 @@
 		<div class="w3-rest">
 			<div class="w3-container w3-padding-16">
 				<div class="w3-border w3-container w3-round w3-text-black">
+                <div id="sound">
+                	
+                </div>
+               
+                <input type="hidden" id="notifData" value="">
 					<?php
 						if(isset($_GET['newProj'])){
 							require('newProj.php');
