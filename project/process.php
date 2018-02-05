@@ -38,14 +38,43 @@
 			$itemPriceRequest = $value['itemPriceRequest'];
 			$itemQuantityRequest = $value['itemQuantityRequest'];
 			//print_r($_SESSION);
-			$insert = $mysqli->query("insert into `request` values ('NULL','{$_SESSION['loggedInId']}','$itemBrandRequest','$itemTypeRequest','$itemQuantityRequest','$itemPriceRequest','','')") or die(mysqli_error());
+			$insert = $mysqli->query("insert into `request` values ('NULL','{$_SESSION['loggedInId']}','$itemBrandRequest','$itemTypeRequest','$itemQuantityRequest','$itemPriceRequest','','','0')") or die(mysqli_error());
 			$counter++;
 		}
 		if($arr_count == $counter){
+			unset($_SESSION['requests']);
+			$response = "SUCCESS";
+			echo  $response;
+		}
+	}
+	
+	
+	
+	//delete request
+	if(isset($_POST['requestIdToDel'])){
+		$id = $_POST['requestIdToDel'];
+		$del = $mysqli->query("delete from request where id='$id'");
+		if($del){
 			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	
+	if(isset($_POST['requestIdUpdate'])){
+		$id = $_POST['requestIdUpdate'];
+		$itemBrand = $_POST['itemBrand'];
+		$itemType = $_POST['itemType'];
+		$itemPrice = $_POST['itemPrice'];
+		$itemQuantity = $_POST['itemQuantity'];
+		$update = $mysqli->query("update request set brand='$itemBrand', type='$itemType', qty='$itemQuantity', price='$itemPrice' where id='$id'");
+		if($update){
+			echo "SUCCESS";
+		}else{
+			echo mysqli_error($mysqli);
+			echo $update;
+			echo "ERROR";
 		}
 	}
 ?>
-
-
-

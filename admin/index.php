@@ -1,3 +1,6 @@
+<?php
+	include("../include/dbcon.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +12,72 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery.js"></script>
 	<script src="../js/actions.js"></script>
+	<script src="../js/dataTables.jqueryui.js"></script>
+	<script src="../js/dataTables.jqueryui.min.js"></script>
+	<script src="../js/datatables.js"></script>
+	<script src="../js/datatables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
     <script>
     $(document).ready(function(){
+		getData();
 		setInterval(getData,3000);
+		
+		 $('#requestTables').DataTable({
+			 ordering: false,
+			 select: false,
+			 searching: false,
+			 "lengthChange": false
+		 });
+		 $('.approvedTable').DataTable({
+			 ordering: false,
+			 select: false,
+			 searching: false,
+			 "lengthChange": false
+		 });
 	});
+	
+	
+	
+	function approve(x){
+		var id = x;
+		$.ajax({
+			url:'process.php',
+			type:'post',
+			data:'approveId='+id,
+			success:function(data){
+				console.log(data);
+				if(data == 'SUCCESS'){
+					alert("Request Approved!")
+					window.location.reload();
+				}else{
+					alert("Error!");
+				}
+			}
+		})
+	}
+	
+	
+	function disaprove(x){
+		var id =x;
+		$.ajax({
+			url:'process.php',
+			type:'post',
+			data:'disapproveId='+id,
+			success:function(data){
+				console.log(data);
+				if(data  == "SUCCESS"){
+					alert("Request Declined!");
+					window.location.reload();
+				}else{
+					alert("Error!");
+				}
+			}
+		})
+	}
+	
+	
+	
+	
 	
 	function getData(){
 		var notifData = $("#notifData").val();
@@ -22,8 +87,9 @@
 				success:function(data){
 					console.log(data);
 					$('#notifRequest').html(data);
+					$('#pendingNotif').html(data);
 					$('#notifData').prop('value',data);
-					if(data == notifData || notifData == ""){
+					if(data == notifData || notifData == "" || data < notifData){
 						//donot play sound
 						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
 					}else{
@@ -73,7 +139,7 @@
     <a href="#home" class="w3-bar-item w3-button">&nbsp;</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
 		<div class="w3-right w3-hide-small">
-			<a href="javascript:void(0);" class="w3-bar-item w3-button">Account Details <span id="notifRequest" class="w3-badge"></span></a>
+			<a href="javascript:void(0);" class="w3-bar-item w3-button">Account Details </a>
 			<a href="../include/logout.php" class="w3-bar-item w3-button"><i class="fa fa-sign-out fa-fx"></i> Logout</a>
 		</div>
 	</div>

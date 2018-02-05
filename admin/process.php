@@ -24,4 +24,24 @@
 			} 
 		}
 	}
+	
+	if(isset($_POST['approveId'])){
+		$id =$_POST['approveId'];
+		$approve = $mysqli->query("update request set status='1' where id='$id'");
+		if($approve){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	if(isset($_POST['disapproveId'])){
+		$id = $_POST['disapproveId'];
+		$disapprove = $mysqli->query("update request set status='2' where id='$id'");
+		if($disapprove){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
 ?>

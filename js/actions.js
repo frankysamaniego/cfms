@@ -32,7 +32,7 @@ function login(){
 			if(this.responseText == "1"){
 				window.open('admin','_parent');
 			}else if(this.responseText == '2'){
-				window.open('admin','_parent');
+				window.open('cashier','_parent');
 			}else if(this.responseText == '3'){
 				window.open('project','_parent')
 			}else{

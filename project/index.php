@@ -14,10 +14,46 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/jquery.js"></script>
 	<script src="../js/actions.js"></script>
+	<script src="../js/dataTables.jqueryui.js"></script>
+	<script src="../js/dataTables.jqueryui.min.js"></script>
+	<script src="../js/datatables.js"></script>
+	<script src="../js/datatables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
     <script>
     $(document).ready(function(){
 		//setInterval(getData,3000);
+		 $('#requestTables').DataTable({
+			 ordering: false,
+			 select: false,
+			 searching: false,
+			 "lengthChange": false
+		 });
+		 
 	});
+	
+	
+	function delRequest(x){
+		var reqIdToDel = x;
+		var cc = confirm("Are you sure you want to delete your request?");
+		if(cc){
+			$.ajax({
+				url:'process.php',
+				type:'post',
+				data:'requestIdToDel='+reqIdToDel,
+				success:function(data){
+					if(data == "SUCCESS"){
+						alert("Request deleted!");
+					}else{
+						
+					}
+				}
+			});
+		}else{
+			
+		}
+		
+	}
+	
 	
 	function getData(){
 		var notifData = $("#notifData").val();
@@ -65,9 +101,29 @@
 					}else{
 						alert("Request error!!");
 					}
-					//window.location.reload();
+					window.location.reload();
 				}
 			})
+		}
+		
+		
+		function updateRequest(x){
+			var data = $('#updateRequest').serializeArray();
+			console.log(data);
+			$.ajax({
+				url:'process.php',
+				type:'post',
+				data:data,
+				success:function(data){
+					console.log(data);
+					if(data == "SUCCESS"){
+						alert("Request updated");
+						window.location.assign("?requests=true")
+					}else{
+						alert("Error updating the request, Try again later");
+					}
+				}
+			});
 		}
     </script>
 	<style>
@@ -124,6 +180,9 @@
 					</div>
 					
 				</nav>
+				<?php
+					if(isset($_GET['requests'])){
+				?>
 				<hr/>
 				<div class="w3-row">
 					<h3 class="w3-bottombar">Current Request</h3>
@@ -138,15 +197,21 @@
 						</thead>
 						<tbody>
 						<?php
-						foreach($_SESSION['requests'] as $key=>$value){
-							echo "<tr><td>".$value['itemBrandRequest']." </td><td> ".$value['itemQuantityRequest']."</td><td>".$value['itemPriceRequest']."</td><td><a href='javascript:void(0)' onclick='removeSessionKey(".$key.")'><span class='fa fa-remove'></span></a></td></tr>";
+						if(!is_array($_SESSION['requests'])){
+							echo "<tr><td colspan='4'>******** No Current Request ********</td></tr>";
+						}else{
+							foreach($_SESSION['requests'] as $key=>$value){
+								echo "<tr><td>".$value['itemBrandRequest']." </td><td> ".$value['itemQuantityRequest']."</td><td>".$value['itemPriceRequest']."</td><td><a href='javascript:void(0)' onclick='removeSessionKey(".$key.")'><span class='fa fa-remove'></span></a></td></tr>";
 							}
+						}
+					
 						?>
 						</tbody>
 					</table>
 					<br/>
 					<button class="w3-btn w3-green w3-small w3-block" onclick="submitRequest()">Confirm Request</button>
 				</div>
+				<?php }?>
 			</div>
 		</div>
 		<div class="w3-rest">
