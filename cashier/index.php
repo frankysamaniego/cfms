@@ -25,14 +25,10 @@
 		 $('#requestTables').DataTable({
 			 ordering: false,
 			 select: false,
-			 searching: false,
-			 "lengthChange": false
 		 });
-		 $('.approvedTable').DataTable({
+		 $('#approvedaa').DataTable({
 			 ordering: false,
 			 select: false,
-			 searching: false,
-			 "lengthChange": false
 		 });
 	});
 	

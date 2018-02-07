@@ -67,7 +67,7 @@ function delete_(x,id){
 }
 </script>
 
-<div id="newAccountModal" class="w3-modal w3-animate-opacity">
+<div id="newAccountModal" class="w3-modal w3-animate-opacity" style="padding-top:50px !important;">
     <div class="w3-modal-content w3-card-4" style="max-width:500px;">
       <header class="w3-container w3-blue"> 
         <span onclick="document.getElementById('newAccountModal').style.display='none'" 

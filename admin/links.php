@@ -2,4 +2,5 @@
 <a href="?compAccounts=true" class="w3-bar-item w3-button <?php if(isset($_GET['compAccounts'])){echo "active";}?>"> <i class='fa fa-group fa-fx'></i> Company Accounts</a>
 <a href="?newProj=true" class="w3-bar-item w3-button <?php if(isset($_GET['newProj'])){echo "active";}?>"> <i class='fa fa-plus fa-fx'></i> Create New Project</a>
 <a href="?projectAccount=true" class="w3-bar-item w3-button  <?php if(isset($_GET['projectAccount'])){echo "active";}?>"> <i class='fa fa-folder-o fa-fx'></i> Project Account</a>
+<a href="?cashFlow=true" class="w3-bar-item w3-button  <?php if(isset($_GET['cashFlow'])){echo "active";}?>"> <i class='fa fa-folder-o fa-fx'></i> Cash Flow</a>
 <a href="?requests=true" class="w3-bar-item w3-button  <?php if(isset($_GET['requests'])){echo "active";}?>"> <i class='fa fa-list-ul fa-fx'></i> Request's <span class="w3-right w3-badge w3-white" id="notifRequest"></span></a>
