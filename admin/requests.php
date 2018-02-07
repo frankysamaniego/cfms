@@ -1,4 +1,4 @@
-<div class="w3-row">
+<div class="w3-row w3-padding-16">
 	<h2 class="" style="margin-bottom:0px;margin-top:20px"><i class="fa fa-road fa-fx"></i> Project Requests</h2><hr style="margin-top:0px;"/>
 	<div class="w3-bar w3-white">
     <button class="w3-bar-item w3-button tablink w3-blue" onclick="openCity(event,'pending')">Pending <span  class="notifData w3-small w3-badge w3-white" id="pendingNotif"></span></button>

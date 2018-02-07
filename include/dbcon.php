@@ -38,4 +38,21 @@
 			return $row['projectInCharge'];
 		}
 	}
+	
+	function getProjStatus($x){
+		if($x == 1){
+			return $stat = "Enabled";
+		}else{
+			return $stat = "Disabled";
+		}
+	}
+	function getAccountType($x){
+		if($x == 1){
+			return $type="Admin";
+		}else if($x == 2){
+			return $type = "Cashier";
+		}else{
+			return $type="Undefined";
+		}
+	}
 ?>

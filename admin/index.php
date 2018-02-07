@@ -170,6 +170,8 @@
 							require('projectAccount.php');
 						}else if(isset($_GET['requests'])){
 							require('requests.php');
+						}else if(isset($_GET['compAccounts'])){
+							require('compAccounts.php');
 						}else{
 							require('home.php');
 						}

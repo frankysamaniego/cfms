@@ -1,26 +1,56 @@
 <script>
 function enable(y){
-	document.getElementById("tdToggle_"+y).innerHTML = "Enabled";
-	document.getElementById("disable_"+y).style.display = "inline";
-	document.getElementById("enable_"+y).style.display = "none";
+	
+	$.ajax({
+		url:'process.php',
+		type:'post',
+		data:'enableId='+y,
+		success:function(data){
+			console.log(data);
+			if(data == "SUCCESS"){
+				window.location.reload();
+			}
+		}
+	});
 }
 
 function disable(x){
-	document.getElementById("tdToggle_"+x).innerHTML = "Disabled";
+	/*document.getElementById("tdToggle_"+x).innerHTML = "Disabled";
 	document.getElementById("disable_"+x).style.display = "none";
-	document.getElementById("enable_"+x).style.display = "inline";
+	document.getElementById("enable_"+x).style.display = "inline";*/
+	$.ajax({
+		url:'process.php',
+		type:'post',
+		data:'disableId='+x,
+		success:function(data){
+			console.log(data);
+			if(data == "SUCCESS"){
+				window.location.reload();
+			}
+		}
+	});
 }
 
 function delete_(x,id){
-	var con = confirm("Are you sure to delete the project?");
+	var con = confirm("Are you sure to delete the user?");
+	//alert(id);
 	if(con == true){
-		document.getElementById("trDel_"+id).style.display="none";
+		$.ajax({
+			url:'process.php',
+			type:'post',
+			data:'projectDel='+id,
+			success:function(data){
+				if(data == "SUCCESS"){
+					document.getElementById("trDel_"+id).style.display="none";
+				}
+			}
+		});
 	}else{
 		
 	}
 }
 </script>
-<div class="w3-row">
+<div class="w3-row w3-padding-16">
 	<div class="w3-row">
 		<div class="w3-col s8 m8 l8">
 		<h3 class="" style="margin-bottom:0px;margin-top:20px"><i class="fa fa-folder-open-o fa-fx"></i> Project Accounts</h3>
@@ -42,50 +72,25 @@ function delete_(x,id){
 				</tr>
 			</thead>
 			<tbody>
-				<tr id="trDel_1">
-					<td>Pj01</td>
-					<td>Polangui</td>
-					<td>Mian</td>
-					<td id="tdToggle_1">Enabled</td>
+				<?php
+					$sql = $mysqli->query("select * from projects");
+					while($row = mysqli_fetch_assoc($sql)){
+				?>
+				<tr id="trDel_<?php echo $row['id']?>">
+					<td><?php echo $row['projectCode'];?></td>
+					<td><?php echo $row['projectLocation'];?></td>
+					<td><?php echo $row['projectInCharge'];?></td>
+					<td id="tdToggle_<?php echo $row['id'];?>"><?php echo getProjStatus($row['status']);?></td>
 					<td>
-						<button class="w3-red w3-button w3-small" style="padding:4px 10px;"  onclick="return disable(1)" id="disable_1"><i class="fa fa-ban fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;display:none;" onclick="return enable(1)" id="enable_1"><i class="fa fa-check fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;"onclick="return delete_(this,'1')"><i class="fa fa-trash fa-lg"></i></button>
+					<?php if($row['status'] == 1){?>
+						<button class="w3-red w3-button w3-small" style="padding:4px 10px;"  onclick="return disable(<?php echo $row['id']?>)" id="disable_<?php echo $row['id']?>"><i class="fa fa-ban fa-lg"></i></button>
+					<?php }else{?>
+						<button class="w3-green w3-button w3-small" style="padding:4px 10px;" onclick="return enable(<?php echo $row['id']?>)" id="enable_<?php echo $row['id']?>"><i class="fa fa-check fa-lg"></i></button>
+					<?php }?>
+						<button class="w3-green w3-button w3-small" style="padding:4px 10px;"onclick="return delete_(this,'<?php echo $row['id']?>')"><i class="fa fa-trash fa-lg"></i></button>
 					</td>
 				</tr>
-				<tr id="trDel_1">
-					<td>Pj01</td>
-					<td>Polangui</td>
-					<td>Mian</td>
-					<td id="tdToggle_1">Enabled</td>
-					<td>
-						<button class="w3-red w3-button w3-small" style="padding:4px 10px;"  onclick="return disable(1)" id="disable_1"><i class="fa fa-ban fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;display:none;" onclick="return enable(1)" id="enable_1"><i class="fa fa-check fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;"onclick="return delete_(this,'1')"><i class="fa fa-trash fa-lg"></i></button>
-					</td>
-				</tr>
-				<tr id="trDel_1">
-					<td>Pj01</td>
-					<td>Polangui</td>
-					<td>Mian</td>
-					<td id="tdToggle_1">Enabled</td>
-					<td>
-						<button class="w3-red w3-button w3-small" style="padding:4px 10px;"  onclick="return disable(1)" id="disable_1"><i class="fa fa-ban fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;display:none;" onclick="return enable(1)" id="enable_1"><i class="fa fa-check fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;"onclick="return delete_(this,'1')"><i class="fa fa-trash fa-lg"></i></button>
-					</td>
-				</tr>
-				<tr id="trDel_1">
-					<td>Pj01</td>
-					<td>Polangui</td>
-					<td>Mian</td>
-					<td id="tdToggle_1">Enabled</td>
-					<td>
-						<button class="w3-red w3-button w3-small" style="padding:4px 10px;"  onclick="return disable(1)" id="disable_1"><i class="fa fa-ban fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;display:none;" onclick="return enable(1)" id="enable_1"><i class="fa fa-check fa-lg"></i></button>
-						<button class="w3-green w3-button w3-small" style="padding:4px 10px;"onclick="return delete_(this,'1')"><i class="fa fa-trash fa-lg"></i></button>
-					</td>
-				</tr>
+				<?php }?>
 			</tbody>
 		</table>
 	</div>

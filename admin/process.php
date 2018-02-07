@@ -44,4 +44,85 @@
 			echo "ERROR";
 		}
 	}
+	if(isset($_POST['disableId'])){
+		$id = $_POST['disableId'];
+		$disable = $mysqli->query("update projects set status='0' where id='$id'");
+		if($disable){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+		
+	}
+	if(isset($_POST['enableId'])){
+		$id = $_POST['enableId'];
+		$disable = $mysqli->query("update projects set status='1' where id='$id'");
+		if($disable){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+		
+	}
+	if(isset($_POST['usersEnableId'])){
+		$id = $_POST['usersEnableId'];
+		$disable = $mysqli->query("update users set status='1' where id='$id'");
+		if($disable){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+		
+	}
+	if(isset($_POST['usersDisableId'])){
+		$id = $_POST['usersDisableId'];
+		$disable = $mysqli->query("update users set status='0' where id='$id'");
+		if($disable){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+		
+	}
+	
+	if(isset($_POST['userDel'])){
+		$id = $_POST['userDel'];
+		$del = $mysqli->query("delete from users where id='$id'");
+		if($del){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	if(isset($_POST['projectDel'])){
+		$id = $_POST['projectDel'];
+		$del = $mysqli->query("delete from projects where id='$id'");
+		if($del){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	
+	
+	if(isset($_POST['saveToAccounts'])){
+		$fname = $_POST['firstName'];
+		$mname = $_POST['middleName'];
+		$lname = $_POST['lastName'];
+		$userName = $_POST['userName'];
+		$password = $_POST['password'];
+		$type = $_POST['newAccountType'];
+		$sql = $mysqli->query("select * from users where userName='$userName' and password='$password'");
+		$num = mysqli_num_rows($sql);
+		if($num > 0){
+			echo "DUPLICATE";
+		}else{
+			$insert  = $mysqli->query("insert into users (firstName,middleName,lastName,userName,accountType,password,status) values ('$fname','$mname','$lname','$userName','$type','$password','1')");
+			if($insert){
+				echo "SUCCESS";
+			}
+		}
+		
+	}
 ?>
