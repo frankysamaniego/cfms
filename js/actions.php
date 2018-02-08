@@ -50,7 +50,7 @@
 	
 	
 	//reqest from project
-	if($_POST['itemBrandRequest']){
+	if(isset($_POST['itemBrandRequest'])){
 		//unset($_SESSION['requests']);
 		if(isset($_SESSION['requests'])){
 			
