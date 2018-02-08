@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 03, 2018 at 05:10 PM
+-- Generation Time: Feb 08, 2018 at 05:25 PM
 -- Server version: 5.1.41
 -- PHP Version: 5.3.1
 
@@ -20,6 +20,25 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 CREATE DATABASE `cfms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `cfms`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `particulars`
+--
+
+CREATE TABLE IF NOT EXISTS `particulars` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `particulars` varchar(255) NOT NULL,
+  `amount` varchar(20) NOT NULL,
+  `voucherId` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `particulars`
+--
+
 
 -- --------------------------------------------------------
 
@@ -65,26 +84,30 @@ CREATE TABLE IF NOT EXISTS `request` (
   `price` int(20) NOT NULL,
   `date` varchar(50) NOT NULL,
   `requesteeId` int(3) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 --
 -- Dumping data for table `request`
 --
 
-INSERT INTO `request` (`id`, `projectId`, `brand`, `type`, `qty`, `price`, `date`, `requesteeId`) VALUES
-(38, 1, 'Portland', 'Cement', 30, 300, '', 0),
-(37, 1, 'Mayon', 'Cement', 20, 300, '', 0),
-(36, 1, 'Portland', 'Cement', 30, 20, '', 0),
-(35, 1, 'asda1', 'asd', 0, 0, '', 0),
-(34, 1, 'Portland', 'Cement', 30, 300, '', 0),
-(33, 1, 'Mayon', 'Cement', 20, 300, '', 0),
-(32, 1, 'Portland', 'Cement', 30, 20, '', 0),
-(31, 1, 'asda1', 'asd', 0, 0, '', 0),
-(30, 1, 'Portland', 'Cement', 30, 300, '', 0),
-(29, 1, 'Mayon', 'Cement', 20, 300, '', 0),
-(28, 1, 'Portland', 'Cement', 30, 20, '', 0),
-(27, 1, 'asda1', 'asd', 0, 0, '', 0);
+INSERT INTO `request` (`id`, `projectId`, `brand`, `type`, `qty`, `price`, `date`, `requesteeId`, `status`) VALUES
+(47, 0, 'asdasd', 'asd', 300, 300, '', 0, '1'),
+(33, 1, 'Mayon', 'Cement', 20, 300, '', 0, '2'),
+(32, 1, 'Portland', 'Cement', 30, 20, '', 0, '2'),
+(31, 1, 'asda1', 'asd', 0, 0, '', 0, '2'),
+(30, 1, 'Portland', 'Cement', 30, 300, '', 0, '0'),
+(29, 1, 'Mayon', 'Cement', 20, 300, '', 0, '2'),
+(28, 1, 'Portland', 'Cement', 30, 20, '', 0, '2'),
+(27, 1, 'asda1', 'asd', 0, 0, '', 0, '2'),
+(39, 1, 'Portland', 'Cement', 100, 800, '', 0, '0'),
+(40, 1, 'Portland', 'Cement', 100, 800, '', 0, '0'),
+(41, 1, 'Portland', 'Cement', 100, 800, '', 0, '0'),
+(42, 1, 'Portland', 'Cement', 100, 800, '', 0, '0'),
+(43, 1, 'Portland', 'Cement', 100, 800, '', 0, '2'),
+(46, 2, 'Portland', 'Cement', 100, 400, '', 0, '0'),
+(45, 2, 'asdjakl', 'ashdkj', 301, 300, '', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -102,14 +125,37 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `firstName`, `middleName`, `lastName`, `userName`, `accountType`, `password`, `status`) VALUES
-(1, 'Administrator', 'admin', 'admin', 'admin', '1', 'admin', '1');
+(1, 'Administrator', 'admin', 'admin', 'admin', '1', 'admin', '1'),
+(3, 'franky', 'Seletaria', 'Samaniego', 'samaniego', '2', 'samaniego_23', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vouchers`
+--
+
+CREATE TABLE IF NOT EXISTS `vouchers` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `requesteeId` varchar(20) NOT NULL,
+  `voucherNo` varchar(20) NOT NULL,
+  `requestDate` varchar(30) NOT NULL,
+  `payee` varchar(255) NOT NULL,
+  `type` varchar(2) NOT NULL,
+  `status` varchar(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `vouchers`
+--
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
