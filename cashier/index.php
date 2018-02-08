@@ -19,8 +19,8 @@
 	<link rel="stylesheet" type="text/css" href="../css/jquery.dataTables.css">
     <script>
     $(document).ready(function(){
-		getData();
-		setInterval(getData,3000);
+		//getData();
+		//setInterval(getData,3000);
 		
 		 $('#requestTables').DataTable({
 			 ordering: false,
@@ -170,6 +170,8 @@
 							require('compAccounts.php');
 						}else if(isset($_GET['cashFlow'])){
 							require('cashFlow.php');
+						}else if(isset($_GET['voucher'])){
+							require('voucher.php');
 						}else{
 							require('home.php');
 						}

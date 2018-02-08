@@ -71,8 +71,8 @@
 						<div class="w3-dropdown-hover">
 							<a href="javascript:void(0);" class="w3-btn"><i class="fa fa-print fa-lg"></i></a>
 							<div class="w3-dropdown-content w3-bar-block  w3-border" style="margin-left: -180px !important;margin-top: -30px !important;">
-							  <a href="?requests=true&transId=<?php echo $row['id']?>&voucherType=1" class="w3-bar-item w3-button">Cash Voucher</a>
-							  <a href="?requests=true&transId=<?php echo $row['id']?>&voucherType=2" class="w3-bar-item w3-button">Check Voucher</a>
+							  <a href="voucher.php?requests=true&transId=<?php echo $row['id']?>&voucherType=1" class="w3-bar-item w3-button" target="_new">Cash Voucher</a>
+							  <a href="voucher.php?requests=true&transId=<?php echo $row['id']?>&voucherType=2" class="w3-bar-item w3-button" target="_new">Check Voucher</a>
 							</div>
 						  </div>
 					</td>
