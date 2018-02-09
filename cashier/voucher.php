@@ -1,5 +1,4 @@
 <?php
-	print_r($_SESSION);
 	if(isset($_SESSION['payeeInfo']) || $_SESSION['particulars']){
 		//echo "<pre>",print_r($_SESSION),"</pre>";
 		unset($_SESSION['payeeInfo']);
@@ -11,20 +10,6 @@
 			$_SESSION['payeeInfo'] = array("payee"=>$payee,"voucherType"=>$type);
 		}
 	}
-	
-	
-	
-	function getVoucherType($x){
-		if($x == 1){
-			return $type = "Cash";
-		}else if($x == 2){
-			return $type = "Check";
-		}else{
-			return $type = "Unknown";
-		}
-	}
-	
-	
 ?>
 
 
@@ -72,11 +57,14 @@ function removeFromArray(x){
 
 function confirmRequest(){
 	var t = confirm("You are about to send request? Proceed?");
+	var payee = $('#payeeee').val();
+	var voucherType = $('#voucherTypeAdd').val();
+	alert(payee+' '+voucherType);
 	if(t){
 		$.ajax({
 			url:'getParticulars.php',
 			type:'post',
-			data:'confirmVoucherRequests='+1,
+			data:'confirmVoucherRequests='+1+'&payeeNameVoucher='+payee+'&voucherType='+voucherType,
 			success:function(data){
 				console.log(data);
 				if(data == "SUCCESS"){
@@ -166,9 +154,12 @@ function confirmRequest(){
 								<td class="w3-center" colspan="2">***** NOTHING *****</td>
 							</tr>
 							<?php }?>
+							
 						</tbody>
 					</table><br/>
 					</form>
+					<input type="hidden" id="payeeee" value="<?php echo $_SESSION['payeeInfo']['payee']?>">
+					<input type="hidden" id="voucherTypeAdd" value="<?php echo $_SESSION['payeeInfo']['voucherType']?>">
 					<button class="w3-button w3-green w3-small" id="confirmVoucher" onclick="return confirmRequest();" disabled>Confirm</button>
 				</div>
 			</div>
