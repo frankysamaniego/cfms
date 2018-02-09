@@ -2,7 +2,29 @@
 	//print_r($_SESSION);
 	$loggedId = $_SESSION['loggedInId'];
 ?>
-
+<script>
+	function cancelVoucher(x){
+		var id = x;
+		var cc =confirm("Are you sure to cancel request?");
+		if(cc){
+			$.ajax({
+				url:'getParticulars.php',
+				type:'post',
+				data:'cancelVoucerRequestId='+id,
+				success:function(data){
+					if(data == "SUCCESS"){
+						$('#todelCancel_'+id).fadeOut('slow');
+					}else{
+						
+					}
+				}
+			});
+		}else{
+			
+		}
+		
+	}
+</script>
 <div class="w3-row w3-padding-16">
 	<h2 class="" style="margin-bottom:0px;margin-top:20px"><i class="fa fa-road fa-fx"></i> Voucher Requests</h2><hr style="margin-top:0px;"/>
 	<div class="w3-bar w3-white">
@@ -29,7 +51,7 @@
 					$query = $mysqli->query("select * from vouchers where requesteeId='$loggedId' and status='0'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
-				<tr>
+				<tr id="todelCancel_<?php echo $row['id']?>">
 					<td><?php echo $row['voucherNo'];?></td>
 					<td><?php echo date('m/d/Y',$row['projectId']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
@@ -65,7 +87,7 @@
 					$query = $mysqli->query("select * from vouchers where requesteeId='$loggedId' and status='1'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
-				<tr>
+				<tr id="todelCancel_<?php echo $row['id']?>">
 					<td><?php echo $row['voucherNo'];?></td>
 					<td><?php echo date('m/d/Y',$row['projectId']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>

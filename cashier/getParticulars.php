@@ -91,4 +91,16 @@
 		}
 		
 	}
+	
+	
+	
+	if(isset($_POST['cancelVoucerRequestId'])){
+		$id = $_POST['cancelVoucerRequestId'];
+		$update = $mysqli->query("update vouchers set status='2' where id='$id'");
+		if($update){
+			echo "SUCCESS";
+		}else{
+			
+		}
+	}
 ?>
