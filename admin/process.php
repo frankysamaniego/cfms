@@ -27,7 +27,8 @@
 	
 	if(isset($_POST['approveId'])){
 		$id =$_POST['approveId'];
-		$approve = $mysqli->query("update request set status='1' where id='$id'");
+		$lastVoucher = lastAprrovedVoucherNo();
+		$approve = $mysqli->query("update vouchers set voucherNo='$lastVoucher' ,status='1' where id='$id'");
 		if($approve){
 			echo "SUCCESS";
 		}else{
@@ -37,7 +38,7 @@
 	
 	if(isset($_POST['disapproveId'])){
 		$id = $_POST['disapproveId'];
-		$disapprove = $mysqli->query("update request set status='2' where id='$id'");
+		$disapprove = $mysqli->query("update vouchers set status='2' where id='$id'");
 		if($disapprove){
 			echo "SUCCESS";
 		}else{
@@ -130,7 +131,8 @@
 	
 	if(isset($_POST['approveVoucerRequestId'])){
 		$id = $_POST['approveVoucerRequestId'];
-		$approve = $mysqli->query("update vouchers set status='1' where id='$id'");
+		$lastVoucher = lastAprrovedVoucherNo();
+		$approve = $mysqli->query("update vouchers set voucherNo='$lastVoucher' ,status='1' where id='$id'");
 		if($approve){
 			echo "SUCCESS";
 		}else{
@@ -143,6 +145,19 @@
 		$id = $_POST['cancelVoucerRequestId'];
 		$approve = $mysqli->query("update vouchers set status='2' where id='$id'");
 		if($approve){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	
+	if(isset($_POST['updateBal'])){
+		$balance = $_POST['updateBal'];
+		$now = getDate();
+		$date = $now[0];
+		$insert = $mysqli->query("insert into balance (balance,dateupdated) values ('$balance','$date')");
+		if($insert){
 			echo "SUCCESS";
 		}else{
 			echo "ERROR";

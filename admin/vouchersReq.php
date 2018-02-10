@@ -72,7 +72,7 @@
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from vouchers where status='0'");
+					$query = $mysqli->query("select * from vouchers where status='0' and vFrom='0'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
@@ -108,7 +108,7 @@
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from vouchers where status='1'");
+					$query = $mysqli->query("select * from vouchers where status='1' and vFrom='0'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
@@ -139,7 +139,7 @@
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from vouchers where status='2'");
+					$query = $mysqli->query("select * from vouchers where status='2' and vFrom='0'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">

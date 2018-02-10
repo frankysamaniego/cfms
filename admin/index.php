@@ -33,6 +33,8 @@
 		 });
 		 $('#declinedData').DataTable({
 		 });
+		 $('#cashFlow').DataTable({
+		 });
 	});
 	
 	
@@ -84,16 +86,16 @@
 				url:'getdata.php',
 				type:'get',
 				success:function(data){
-					console.log(data);
 					$('#notifRequest').html(data);
 					$('#pendingNotif').html(data);
 					$('#notifData').prop('value',data);
 					if(data == notifData || notifData == "" || data < notifData){
 						//donot play sound
-						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
+						//document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
+						$('#soundproj').html();
 					}else{
 						//play sound
-						document.getElementById("sound").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
+						document.getElementById("soundproj").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
 					}
 				}
 			});	
@@ -104,7 +106,6 @@
 				url:'getVoucherData.php',
 				type:'get',
 				success:function(data){
-					console.log(data);
 					$('#voucherNotifRequest').html(data);
 					$('#pendingVoucherNotif').html(data);
 					$('#notifVoucherData').prop('value',data);
@@ -134,7 +135,7 @@
 		@media only screen and (min-width: 1025px) {
 			/* For screens: higer than 768 px */
 			#left_menu_container{
-				margin:4% 5% 1%;
+				margin:4% 1% 1%;
 			}
 		}
 		@media only screen and (max-width: 768px) {
@@ -165,7 +166,7 @@
 </div>	
 <div class="w3-row" id="left_menu_container" style="">
 	<div class="w3-container">
-		<div class="w3-third" style="background-color:#fafafa;">
+		<div class="w3-quarter" style="background-color:#fafafa;">
 			<div class="w3-container w3-padding-16">
 				<nav class="w3-bar-block w3-border w3-white w3-round" style="margin-left:20px;margin-right:20px;">
 					<div class="w3-text-blue">
@@ -178,6 +179,9 @@
 			<div class="w3-container w3-padding-16">
 				<div class="w3-border w3-container w3-round w3-text-black">
                 <div id="sound">
+                	
+                </div> 
+				<div id="soundproj">
                 	
                 </div>
                
@@ -196,6 +200,8 @@
 							require('cashFlow.php');
 						}else if(isset($_GET['vouchersReq'])){
 							require('vouchersReq.php');
+						}else if(isset($_GET['companyBal'])){
+							require('companyBal.php');
 						}else{
 							require('home.php');
 						}

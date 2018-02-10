@@ -37,7 +37,6 @@
 		<table class="w3-table row-border w3-small stripped" id="requestTables">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Voucher No.</th>
 					<th>Date of Request</th>
 					<th>Payee</th>
 					<th>Type</th>
@@ -52,7 +51,6 @@
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
-					<td><?php echo $row['voucherNo'];?></td>
 					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
 					<td><?php echo getVoucherType($row['type'])?></td>
@@ -95,7 +93,7 @@
 					<td><?php echo getParticulars($row['id'])?></td>
 					<td><?php echo getParticularsTotal($row['id'])?></td>
 					<td class="w3-center">
-						<a href="voucherPrint.php?requests=true&transId=<?php echo $row['id']?>&voucherType=<?php echo $row['type'];?>" class="w3-text-red" onclick="cancelVoucher(<?php echo $row['id']?>)" alt="Cancel" title="Cancel"><i class="fa fa-print"></i></a>
+						<a href="voucherPrint.php?requests=true&transId=<?php echo $row['id']?>&voucherType=<?php echo $row['type'];?>" class="w3-text-red" alt="Print" title="Print"><i class="fa fa-print"></i></a>
 					</td>
 				</tr>
 				<?php }?>

@@ -1,11 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Chech Voucher</title>
-</head>
 
-<body>
 <table border="1" width="900" style="border:1px solid #000; border-collapse:collapse;">
 	<tr>
     	<td rowspan="2" width="600"></td>
@@ -21,9 +14,9 @@
         <td width="100">TOTAL</td>
     </tr>
     <tr>	
-    	<td style="height:300px;" rowspan="2"></td>
-        <td  style="height:270px;"></td>
-        <td style="height:270px;"></td>
+    	<td rowspan="2">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
     </tr>	
     <tr>
     	<td style="width:100px;"></td>
@@ -71,5 +64,3 @@
          
     </tr>
 </table>
-</body>
-</html>

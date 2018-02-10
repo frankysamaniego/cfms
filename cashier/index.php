@@ -21,7 +21,15 @@
     $(document).ready(function(){
 		//getData();
 		//setInterval(getData,3000);
-		
+		$('.checkNumBox').keyup(function (e) {
+			var key   = e.keyCode ? e.keyCode : e.which;
+				if (!( [8, 9, 13, 27, 46, 110, 190].indexOf(key) !== -1 ||
+					 (key == 65 && ( e.ctrlKey || e.metaKey  ) ) || 
+					 (key >= 35 && key <= 40) ||
+					 (key >= 48 && key <= 57 && !(e.shiftKey || e.altKey)) ||
+					 (key >= 96 && key <= 105)
+				   )) e.preventDefault();
+		});
 		 $('#requestTables').DataTable({
 			 ordering: false,
 			 select: false,
@@ -30,10 +38,42 @@
 			 ordering: false,
 			 select: false,
 		 });
+		 $('#printedVoucher').DataTable({
+			 ordering: false,
+			 select: false,
+		 });
 	});
 	
+	function updateVoucherWithCheckNum(x){
+		var checkNum = $('#checkNum_'+x).val();
+		var checkType = $('#checkType_'+x).val();
+		var voucher_id = $('#voucher_id_'+x).val();
+		$.ajax({
+			url:'getParticulars.php',
+			type:'post',
+			data:'checkNumUp='+checkNum+'&idToUpVoucher='+voucher_id+'&checkTypeUp='+checkType,
+			success:function(data){
+				console.log(data);
+				if(data == "SUCCESS"){
+					//oucherPrint.php?voucherType=<?php echo $row['type']?>&voucherid=<?php echo dechex($row['id'])?>
+					alert(data);
+					window.open("voucherPrint.php?voucherType="+checkType+"&voucherid="+voucher_id+"",'_new');
+						window.location.reload();
+				}
+			}
+		});
+	}
 	
 	
+	
+	
+	function checkCheckNum(evt){
+		var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+          return true;
+	}
 	function approve(x){
 		var id = x;
 		$.ajax({
@@ -111,7 +151,7 @@
 		@media only screen and (min-width: 1025px) {
 			/* For screens: higer than 768 px */
 			#left_menu_container{
-				margin:4% 5% 1%;
+				margin:4% 1% 1%;
 			}
 		}
 		@media only screen and (max-width: 768px) {
@@ -142,7 +182,7 @@
 </div>	
 <div class="w3-row" id="left_menu_container" style="">
 	<div class="w3-container">
-		<div class="w3-third" style="background-color:#fafafa;">
+		<div class="w3-quarter" style="background-color:#fafafa;">
 			<div class="w3-container w3-padding-16">
 				<nav class="w3-bar-block w3-border w3-white w3-round" style="margin-left:20px;margin-right:20px;">
 					<div class="w3-text-blue">

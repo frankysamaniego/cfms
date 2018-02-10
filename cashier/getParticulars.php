@@ -72,7 +72,7 @@
 		//print_r($_SESSION);
 		$c = count($_SESSION['particulars']);
 		$counter = 0;
-		$insert = $mysqli->query("insert into vouchers (requesteeId,voucherNo,requestDate,payee,type,status) values ('$requesteeId','$voucherNow','$now','$payee','$type','0')");
+		$insert = $mysqli->query("insert into vouchers (requesteeId,voucherNo,requestDate,payee,type,status,vFrom,statusFlow) values ('$requesteeId','','$now','$payee','$type','0','0','out')");
 		if($insert){
 			$lastVoucherId = getLastVoucherId();
 			foreach($_SESSION['particulars'] as $key => $value){
@@ -103,4 +103,21 @@
 			
 		}
 	}
+	
+	
+	
+	if(isset($_POST['checkNumUp'])){
+		$checkNum =$_POST['checkNumUp'];
+		$idToUpVoucher =hexdec($_POST['idToUpVoucher']);
+		$checkTypeUp =$_POST['checkTypeUp'];
+		$update = $mysqli->query("update vouchers set checkNo='$checkNum' where id='$idToUpVoucher'");
+		if($update){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	
+	
 ?>

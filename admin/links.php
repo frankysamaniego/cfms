@@ -5,3 +5,4 @@
 <a href="?cashFlow=true" class="w3-bar-item w3-button  <?php if(isset($_GET['cashFlow'])){echo "active";}?>"> <i class='fa fa-folder-o fa-fx'></i> Cash Flow</a>
 <a href="?requests=true" class="w3-bar-item w3-button  <?php if(isset($_GET['requests'])){echo "active";}?>"> <i class='fa fa-list-ul fa-fx'></i> Project Request's <span class="w3-right w3-badge w3-white" id="notifRequest"></span></a>
 <a href="?vouchersReq=true" class="w3-bar-item w3-button  <?php if(isset($_GET['vouchersReq'])){echo "active";}?>"> <i class='fa fa-list-ul fa-fx'></i> Vouchers Request's <span class="w3-right w3-badge w3-white" id="voucherNotifRequest"></span></a>
+<a href="?companyBal=true" class="w3-bar-item w3-button  <?php if(isset($_GET['companyBal'])){echo "active";}?>"> <i class='fa fa-money fa-fx'></i> Update Co. Balance <span class="w3-right w3-badge w3-white" id="voucherNotifRequest"></span></a>

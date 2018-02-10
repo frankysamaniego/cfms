@@ -9,32 +9,28 @@
   <div id="pending" class="w3-container city">
     <h4>Pending Requests</h4>
     <div class="w3-row w3-padding-16">
-		<table class="w3-table w3-small" id="requestTables">
+		<table class="w3-table w3-small row-border" id="requestTables">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Project Code</th>
-					<th>Project In-Charge</th>
-					<th>Brand</th>
+					<th>Date of Request</th>
+					<th>Payee</th>
 					<th>Type</th>
-					<th>Price</th>
-					<th>Quantity</th>
-					<th>Total</th>
-					<th>Action</th>
+					<th>Particulars</th>
+					<th>Total Amount</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from request where status='0'");
+					$query = $mysqli->query("select * from vouchers where vFrom ='1' and status = '0'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr>
-					<td><?php echo getProjectCode($row['projectId']);?></td>
-					<td><?php echo getIncharge($row['projectId']);?></td>
-					<td><?php echo $row['brand']?></td>
-					<td><?php echo $row['type']?></td>
-					<td><?php echo $row['price']?></td>
-					<td><?php echo $row['qty']?></td>
-					<td><?php echo $row['qty'] * $row['price']?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
+					<td><?php echo $row['payee']?></td>
+					<td><?php echo getVoucherType($row['type'])?></td>
+					<td><?php echo getProjParticulars($row['id']);?></td>
+					<td><?php echo number_format(getProjParticularsTotal($row['id']),2);?></td>
 					<td style="text-align:center">
 						<a href="javascript:void(0);" onclick="approve(<?php echo $row['id']?>)" class=" w3-small"><i class="fa fa-check fa-1x"></i></a>
 						<a href="javascript:void(0);" onclick="disaprove(<?php echo $row['id']?>)" class=" w3-small w3-text-red"><i class="fa fa-trash fa-1x"></i></a>
@@ -48,31 +44,29 @@
 
   <div id="approved" class="w3-container city" style="display:none">
       <h4>Approved Requests</h4>
-    <table class="w3-table w3-small" class="approvedTable">
+    <table class="w3-table w3-small row-border" class="approvedTable" id="approvedaa">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Project Code</th>
-					<th>Project In-Charge</th>
-					<th>Brand</th>
+					<th>Voucher No.</th>
+					<th>Date of Request</th>
+					<th>Payee</th>
 					<th>Type</th>
-					<th>Price</th>
-					<th>Quantity</th>
-					<th>Total</th>
+					<th>Particulars</th>
+					<th>Total Amount</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from request where status='1'");
+					$query = $mysqli->query("select * from vouchers where vFrom ='1' and status = '1'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr>
-					<td><?php echo getProjectCode($row['projectId']);?></td>
-					<td><?php echo getIncharge($row['projectId']);?></td>
-					<td><?php echo $row['brand']?></td>
-					<td><?php echo $row['type']?></td>
-					<td><?php echo $row['price']?></td>
-					<td><?php echo $row['qty']?></td>
-					<td><?php echo $row['qty'] * $row['price']?></td>
+					<td><?php echo $row['voucherNo'];?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
+					<td><?php echo $row['payee']?></td>
+					<td><?php echo getVoucherType($row['type'])?></td>
+					<td><?php echo getProjParticulars($row['id']);?></td>
+					<td><?php echo number_format(getProjParticularsTotal($row['id']),2);?></td>
 				</tr>
 				<?php }?>
 			</tbody>
@@ -81,31 +75,27 @@
 
   <div id="declined" class="w3-container city" style="display:none">
     <h4>Disapproved Requests</h4>
-    <table class="w3-table w3-small" class="approvedTable">
+    <table class="w3-table w3-small row-border" class="approvedTable" id="declinedData">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Project Code</th>
-					<th>Project In-Charge</th>
-					<th>Brand</th>
+					<th>Date of Request</th>
+					<th>Payee</th>
 					<th>Type</th>
-					<th>Price</th>
-					<th>Quantity</th>
-					<th>Total</th>
+					<th>Particulars</th>
+					<th>Total Amount</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from request where status='2'");
+					$query = $mysqli->query("select * from vouchers where vFrom ='1' and status = '2'");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr>
-					<td><?php echo getProjectCode($row['projectId']);?></td>
-					<td><?php echo getIncharge($row['projectId']);?></td>
-					<td><?php echo $row['brand']?></td>
-					<td><?php echo $row['type']?></td>
-					<td><?php echo $row['price']?></td>
-					<td><?php echo $row['qty']?></td>
-					<td><?php echo $row['qty'] * $row['price']?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
+					<td><?php echo $row['payee']?></td>
+					<td><?php echo getVoucherType($row['type'])?></td>
+					<td><?php echo getProjParticulars($row['id']);?></td>
+					<td><?php echo number_format(getProjParticularsTotal($row['id']),2);?></td>
 				</tr>
 				<?php }?>
 			</tbody>

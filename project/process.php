@@ -32,20 +32,34 @@
 	if(isset($_POST['confirmRequest'])){
 		$arr_count = count($_SESSION['requests']);
 		$counter = 0;
-		foreach($_SESSION['requests'] as $key => $value){
-			$itemBrandRequest = $value['itemBrandRequest'];
-			$itemTypeRequest = $value['itemTypeRequest'];
-			$itemPriceRequest = $value['itemPriceRequest'];
-			$itemQuantityRequest = $value['itemQuantityRequest'];
-			//print_r($_SESSION);
-			$insert = $mysqli->query("insert into `request` values ('NULL','{$_SESSION['loggedInId']}','$itemBrandRequest','$itemTypeRequest','$itemQuantityRequest','$itemPriceRequest','','','0')") or die(mysqli_error());
-			$counter++;
+		$lastVoucherId = getLastVoucherIda(2);
+		$date = getDate();
+		$now = $date[0];
+		$payeee = getProjectName($_SESSION['loggedInId']);
+		if($arr_count > 0){
+			$insertToVoucher = $mysqli->query("insert into vouchers (requesteeId,voucherNo,requestDate,payee,type,status,vFrom,statusFlow) values ('{$_SESSION['loggedInId']}','','$now','$payeee','2','0','1','out')");
+				if($insertToVoucher){
+					$lastIdOfVoucher = getLastIdOfVoucher();
+					foreach($_SESSION['requests'] as $key => $value){
+						$itemBrandRequest = $value['itemBrandRequest'];
+						$itemTypeRequest = $value['itemTypeRequest'];
+						$itemPriceRequest = $value['itemPriceRequest'];
+						$itemQuantityRequest = $value['itemQuantityRequest'];
+						//print_r($_SESSION);
+						$insert = $mysqli->query("insert into `request` values ('NULL','{$_SESSION['loggedInId']}','$itemBrandRequest','$itemTypeRequest','$itemQuantityRequest','$itemPriceRequest','','','0','$lastIdOfVoucher')") or die(mysqli_error());
+						$counter++;
+					}
+					if($arr_count == $counter){
+						unset($_SESSION['requests']);
+						$response = "SUCCESS";
+						echo  $response;
+					}
+				}
+		}else{
+			echo "ERROR!";
 		}
-		if($arr_count == $counter){
-			unset($_SESSION['requests']);
-			$response = "SUCCESS";
-			echo  $response;
-		}
+		
+		
 	}
 	
 	
