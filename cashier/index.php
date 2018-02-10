@@ -214,6 +214,8 @@
 							require('voucher.php');
 						}else if(isset($_GET['voucherReq'])){
 							require('voucherRequests.php');
+						}else if(isset($_GET['cashIn'])){
+							require('cashIn.php');
 						}else{
 							require('home.php');
 						}

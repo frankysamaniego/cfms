@@ -1,5 +1,7 @@
 <?php
-	
+	$latestBalance = getLatestBal();
+	$latestUpdateDate = getLateseUp();
+	echo $latestBalance;
 ?>
 
 <div class="w3-row w3-padding-16">
@@ -20,8 +22,9 @@
 			</thead>
 			<tbody>
 				<?php
-					$sql = $mysqli->query("select * from vouchers where status='1'");
+					$sql = $mysqli->query("select * from vouchers where status='1' order by id asc");
 					while($row = mysqli_fetch_assoc($sql)){
+					if($row['requestDate'] >= $latestUpdateDate){
 				?>
 				<tr>
 					<td><?php echo date('m/d/Y',$row['requestDate'])?></td>
@@ -30,16 +33,24 @@
 					<td><?php echo $row['checkNo']?></td>
 					<td><?php echo $row['voucherNo']?></td>
 					<td><?php if($row['statusFlow'] == 'in'){
-						echo getCashIn($row['id']);
+						$amountIn = getCashIn($row['id']);
+						echo number_format($amountIn,2);
+						$latestBalance = $latestBalance + $amountIn;
 					}?></td>
 					<td><?php
 						if($row['statusFlow'] == 'out'){
+							$totalPart =getParticularsTotal($row['id']);
 							echo number_format(getParticularsTotal($row['id']),2);
+							$latestBalance = $latestBalance-$totalPart;
+						}else if($row['statusFlow'] == 'in'){
+							$amountIn = getCashIn($id);
+							echo number_format($amountIn,2);
+							
 						}
 					?></td>
-					<td><?php echo "balance here";?></td>
+					<td><?php echo number_format($latestBalance,2);?></td>
 				</tr>
-				<?php }?>
+					<?php }}?>
 			</tbody>
 		</table>
 	</div>

@@ -183,4 +183,19 @@
 			return $row['amount'];
 		}
 	}
+	
+	function getLatestBal(){
+		global $mysqli;
+		$sql = $mysqli->query("select * from balance order by id desc limit 1");
+		while($row = mysqli_fetch_assoc($sql)){
+			return $row['balance'];
+		}
+	}
+	function getLateseUp(){
+		global $mysqli;
+		$sql = $mysqli->query("select * from balance order by id desc limit 1");
+		while($row = mysqli_fetch_assoc($sql)){
+			return $row['dateupdated'];
+		}
+	}
 ?>

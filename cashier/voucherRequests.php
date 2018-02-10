@@ -93,9 +93,32 @@
 					<td><?php echo getParticulars($row['id'])?></td>
 					<td><?php echo getParticularsTotal($row['id'])?></td>
 					<td class="w3-center">
-						<a href="voucherPrint.php?requests=true&transId=<?php echo $row['id']?>&voucherType=<?php echo $row['type'];?>" class="w3-text-red" alt="Print" title="Print"><i class="fa fa-print"></i></a>
+						<a href="javacsript:void(0);" onclick="document.getElementById('checkNoModal_<?php echo $row['id']?>').style.display='block'" ><i class=" fa fa-print fa-lg"></i></a>
 					</td>
 				</tr>
+				<div id="checkNoModal_<?php echo $row['id']?>" class="w3-modal">
+					 <div class="w3-modal-content w3-card-4 w3-animate-opacity" style="width:400px;">
+					  <header class="w3-container w3-blue"> 
+					   <span onclick="document.getElementById('checkNoModal_<?php echo $row['id']?>').style.display='none'" 
+					   class="w3-button w3-blue w3-small w3-display-topright">&times;</span>
+					   <h4>Please Provide the check Number</h4>
+					  </header>
+					  <div class="w3-row">
+						<div class="w3-container w3-padding">
+							<form class="w3-form " action="javascript:void(0);" onsubmit="updateVoucherWithCheckNum(<?php echo $row['id']?>)" method="post">
+								<label>Check Number:</label>
+								<input type="text" name="checkNum_<?php echo $row['id']?>" class="w3-input w3-border checkNumBox" onkeypress="return checkCheckNum(event)" id="checkNum_<?php echo $row['id']?>" autocomplete="off" required>
+								<input type="hidden" name="checkType_<?php echo $row['id']?>" id="checkType_<?php echo $row['id']?>" value="<?php echo $row['type']?>">
+								<input type="hidden" name="voucher_id_<?php echo $row['id']?>" id="voucher_id_<?php echo $row['id']?>" value="<?php echo dechex($row['id'])?>">
+								<br/>
+								<input type="submit"  class="w3-button w3-block w3-green" value="Submit Check Number" name="checkCnum">
+							</form>
+						</div>
+					  </div>
+					 </div>
+					</div>
+				
+				
 				<?php }?>
 			</tbody>
 		</table>

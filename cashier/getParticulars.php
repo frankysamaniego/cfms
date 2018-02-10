@@ -119,5 +119,22 @@
 	}
 	
 	
-	
+	if(isset($_POST['cashInPayee'])){
+		//print_r($_POST);
+		$cashInPayee = $_POST['cashInPayee'];
+		$cashInProjectId = $_POST['cashInProjectId'];
+		$cashInAmount = $_POST['cashInAmount'];
+		$date =getDate();
+		$now = $date[0];
+		$insert  = $mysqli->query("insert into vouchers (requesteeId,voucherNo,checkNo,requestDate,payee,type,status,vFrom,statusFlow) values ('','','','$now','$cashInPayee','','1','','in')");
+		if($insert){
+			$lastVoucher =getLastIdOfVoucher();
+			$insertToCashIn = $mysqli->query("insert into cashin (voucherId,particulars,amount) values ('$lastVoucher','$cashInProjectId','$cashInAmount')");
+			if($insertToCashIn){
+				echo "SUCCESS";
+			}else{
+				echo "ERROR";
+			}
+		}
+	}
 ?>
