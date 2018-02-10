@@ -59,7 +59,6 @@ function confirmRequest(){
 	var t = confirm("You are about to send request? Proceed?");
 	var payee = $('#payeeee').val();
 	var voucherType = $('#voucherTypeAdd').val();
-	alert(payee+' '+voucherType);
 	if(t){
 		$.ajax({
 			url:'getParticulars.php',
@@ -76,7 +75,6 @@ function confirmRequest(){
 			}
 		})
 	}else{
-		alert("no!");
 	}
 }
 </script>

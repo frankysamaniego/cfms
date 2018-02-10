@@ -25,16 +25,13 @@
 		setInterval(getVoucherData,3000);
 		
 		 $('#requestTables').DataTable({
-			 ordering: false,
-			 select: false,
-			 searching: false,
-			 "lengthChange": false
 		 });
 		 $('.approvedTable').DataTable({
 			 ordering: false,
-			 select: false,
-			 searching: false,
-			 "lengthChange": false
+		 });
+		 $('#approvedaa').DataTable({
+		 });
+		 $('#declinedData').DataTable({
 		 });
 	});
 	
@@ -96,21 +93,21 @@
 						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
 					}else{
 						//play sound
-						//document.getElementById("sound").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
+						document.getElementById("sound").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
 					}
 				}
 			});	
 		}
 	function getVoucherData(){
-		var notifData = $("#notifData").val();
+		var notifData = $("#notifVoucherData").val();
 			$.ajax({
 				url:'getVoucherData.php',
 				type:'get',
 				success:function(data){
 					console.log(data);
 					$('#voucherNotifRequest').html(data);
-					$('#pendingNotif').html(data);
-					$('#notifData').prop('value',data);
+					$('#pendingVoucherNotif').html(data);
+					$('#notifVoucherData').prop('value',data);
 					if(data == notifData || notifData == "" || data < notifData){
 						//donot play sound
 						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
@@ -185,6 +182,7 @@
                 </div>
                
                 <input type="hidden" id="notifData" value="">
+                <input type="hidden" id="notifVoucherData" value="">
 					<?php
 						if(isset($_GET['newProj'])){
 							require('newProj.php');
@@ -196,6 +194,8 @@
 							require('compAccounts.php');
 						}else if(isset($_GET['cashFlow'])){
 							require('cashFlow.php');
+						}else if(isset($_GET['vouchersReq'])){
+							require('vouchersReq.php');
 						}else{
 							require('home.php');
 						}
