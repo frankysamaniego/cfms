@@ -125,4 +125,27 @@
 		}
 		
 	}
+	
+	
+	
+	if(isset($_POST['approveVoucerRequestId'])){
+		$id = $_POST['approveVoucerRequestId'];
+		$approve = $mysqli->query("update vouchers set status='1' where id='$id'");
+		if($approve){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
+	
+	
+	if(isset($_POST['cancelVoucerRequestId'])){
+		$id = $_POST['cancelVoucerRequestId'];
+		$approve = $mysqli->query("update vouchers set status='2' where id='$id'");
+		if($approve){
+			echo "SUCCESS";
+		}else{
+			echo "ERROR";
+		}
+	}
 ?>
