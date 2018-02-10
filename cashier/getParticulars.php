@@ -1,6 +1,5 @@
 <?php 
-	require("../include/dbcon.php");
-	session_start();
+	require("../include/dbcon.php"); 
 	function getLastVoucherNo($x){
 		global $mysqli;
 		$sql = $mysqli->query("select * from vouchers where type='$x' order by id desc limit 1");

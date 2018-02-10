@@ -1,5 +1,5 @@
 <?php 
-	if(isset($_SESSION['payeeInfo']) || $_SESSION['particulars']){ 
+	if(isset($_SESSION['payeeInfo']) || isset($_SESSION['particulars'])){ 
 		//echo "<pre>",print_r($_SESSION),"</pre>";
 		unset($_SESSION['payeeInfo']);
 		unset($_SESSION['particulars']);
