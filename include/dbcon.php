@@ -1,6 +1,6 @@
 <?php
-	date_default_timezone_set("Asia/Manila");
 	session_start();
+	date_default_timezone_set("Asia/Manila");
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -53,6 +53,37 @@
 			return $type = "Cashier";
 		}else{
 			return $type="Undefined";
+		}
+	}
+	
+	function getParticulars($x){
+		global $mysqli;
+		$sql = $mysqli->query("select * from particulars where voucherId='$x'");
+			echo "<ul>";
+		while($row = mysqli_fetch_assoc($sql)){
+			
+			echo "<li>".$row['particulars']." @ ".$row['amount']."</li>";
+		}
+			echo "</ul>";
+	}
+	function getParticularsTotal($x){
+		global $mysqli;
+		$sql = $mysqli->query("select * from particulars where voucherId='$x'");
+			$total = 0;
+		while($row = mysqli_fetch_assoc($sql)){
+			$total = $total + $row['amount'];
+		}
+		return $total;
+	}
+	
+	
+	function getVoucherType($x){
+		if($x == 1){
+			return $type = "Cash";
+		}else if($x == 2){
+			return $type = "Check";
+		}else{
+			return $type = "Unknown";
 		}
 	}
 ?>

@@ -172,6 +172,8 @@
 							require('cashFlow.php');
 						}else if(isset($_GET['voucher'])){
 							require('voucher.php');
+						}else if(isset($_GET['voucherReq'])){
+							require('voucherRequests.php');
 						}else{
 							require('home.php');
 						}

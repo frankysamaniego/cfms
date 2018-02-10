@@ -1,4 +1,5 @@
 <a href="../cashier" class="w3-bar-item w3-button <?php if(!$_GET){echo "active";}?>"> <i class='fa fa-home fa-fx'></i> Home</a>
 <a href="?requests=true" class="w3-bar-item w3-button  <?php if(isset($_GET['requests'])){echo "active";}?>"> <i class='fa fa-list-ul fa-fx'></i> Request's <span class="w3-right w3-badge w3-white" id="notifRequest"></span></a>
+<a href="?voucherReq=true" class="w3-bar-item w3-button  <?php if(isset($_GET['voucherReq'])){echo "active";}?>"> <i class='fa fa-list-ul fa-fx'></i> Voucher Request's <span class="w3-right w3-badge w3-white" id="notifRequest"></span></a>
 <a href="?voucher=true" class="w3-bar-item w3-button <?php if(isset($_GET['voucher'])){echo "active";}?>"> <i class='fa fa-plus fa-fx'></i> Create Voucher</a>
 <a href="?pettyCash=true" class="w3-bar-item w3-button <?php if(isset($_GET['pettyCash'])){echo "active";}?>"> <i class='fa fa-plus fa-fx'></i> Petty Cash</a>
