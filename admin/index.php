@@ -20,7 +20,9 @@
     <script>
     $(document).ready(function(){
 		getData();
+		getVoucherData();
 		setInterval(getData,3000);
+		setInterval(getVoucherData,3000);
 		
 		 $('#requestTables').DataTable({
 			 ordering: false,
@@ -87,6 +89,26 @@
 				success:function(data){
 					console.log(data);
 					$('#notifRequest').html(data);
+					$('#pendingNotif').html(data);
+					$('#notifData').prop('value',data);
+					if(data == notifData || notifData == "" || data < notifData){
+						//donot play sound
+						document.getElementById("sound").innerHTML="<audio><source src='notif.mp3' type='audio/mpeg'></audio>";
+					}else{
+						//play sound
+						//document.getElementById("sound").innerHTML="<audio autoplay><source src='notif.mp3' type='audio/mpeg'></audio>";
+					}
+				}
+			});	
+		}
+	function getVoucherData(){
+		var notifData = $("#notifData").val();
+			$.ajax({
+				url:'getVoucherData.php',
+				type:'get',
+				success:function(data){
+					console.log(data);
+					$('#voucherNotifRequest').html(data);
 					$('#pendingNotif').html(data);
 					$('#notifData').prop('value',data);
 					if(data == notifData || notifData == "" || data < notifData){

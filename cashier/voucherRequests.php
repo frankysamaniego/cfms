@@ -53,7 +53,7 @@
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
 					<td><?php echo $row['voucherNo'];?></td>
-					<td><?php echo date('m/d/Y',$row['projectId']);?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
 					<td><?php echo getVoucherType($row['type'])?></td>
 					<td><?php echo getParticulars($row['id'])?></td>
@@ -89,7 +89,7 @@
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
 					<td><?php echo $row['voucherNo'];?></td>
-					<td><?php echo date('m/d/Y',$row['projectId']);?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
 					<td><?php echo getVoucherType($row['type'])?></td>
 					<td><?php echo getParticulars($row['id'])?></td>
