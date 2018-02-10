@@ -1,6 +1,6 @@
 <?php
-	print_r($_SESSION);
-	if(isset($_SESSION['payeeInfo']) || $_SESSION['particulars']){
+	//print_r($_SESSION);
+	if(isset($_SESSION['payeeInfo']) || isset($_SESSION['particulars'])){
 		//echo "<pre>",print_r($_SESSION),"</pre>";
 		unset($_SESSION['payeeInfo']);
 		unset($_SESSION['particulars']);

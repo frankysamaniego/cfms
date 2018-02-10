@@ -1,6 +1,5 @@
 <?php
-	require("../include/dbcon.php");
-session_start();
+	require("../include/dbcon.php"); 
 	function getLastVoucherNo(){
 		
 	}
