@@ -127,7 +127,7 @@ if($_GET['voucherType'] == 1){
 <table border="1" width="900" style="border:1px solid #000; border-collapse:collapse;">
 	<tr>
     	<td rowspan="2" width="600"></td>
-        <td colspan="2">No: <?php echo formatNumber($voucherId)?></td>
+        <td colspan="2">No: <?php echo formatNumber($voucherNum)?></td>
     </tr>
     <tr>
     	 
@@ -201,7 +201,7 @@ if($_GET['voucherType'] == 1){
 <table border="1" width="900" style="border:1px solid #000; border-collapse:collapse;">
 	<tr>
     	<td rowspan="2" width="600"><?php echo $payee;?></td>
-        <td colspan="2">No: <?php echo formatNumber($voucherId)?></td>
+        <td colspan="2">No: <?php echo formatNumber($voucherNum)?></td>
     </tr>
     <tr>
     	 
@@ -215,19 +215,35 @@ if($_GET['voucherType'] == 1){
 	<?php
 		$grandTotal = 0;
 		$ss = $mysqli->query("select * from request where voucherId='$idVoucher'");
+		if(mysqli_num_rows($ss) > 0){
 		while($rr = mysqli_fetch_assoc($ss)){
 			$total = $rr['price']*$rr['qty'];
-			$a = explode(".",$total);
+			$a = explode(".",number_format($total,2));
 			$toatlPrice = number_format($total,0);
 			$grandTotal = $grandTotal + $total;
-			$grandCents = explode(".",$grandTotal);
+			$grandCents = explode(".",number_format($grandTotal,2));
+			
 	?>
 		<tr>	
 		<td rowspan="" align="center"><?php echo $rr['brand'].' / ('.$rr['qty'].'pc/s * '.$rr['price'].'/pc )';?></td>
 			<td align="right"><?php echo $toatlPrice?> &nbsp;</td>
 			<td align="left"><?php echo $a[1];?></td>
 		</tr>
-	<?php }?>
+<?php }}else{
+		$ss2 = $mysqli->query("select * from particulars where voucherId='$idVoucher'");
+		while($rr = mysqli_fetch_assoc($ss2)){
+		$total = $total + $rr['amount'];
+		$a = explode(".",number_format($total,2));
+		$toatlPrice = number_format($total,0);
+		$grandTotal = $grandTotal + $total;
+		$grandCents = explode(".",number_format($grandTotal,2));?>
+		
+		<tr>	
+		<td rowspan="" align="center"><?php echo $rr['particulars'];?></td>
+			<td align="right"><?php echo $toatlPrice?> &nbsp;</td>
+			<td align="left"><?php echo $a[1];?></td>
+<?php }}?>
+		
     <tr>
     	<td style="width:100px;" style="text-align:right;" align="right">TOTAL</td>
         <td align="right"><?php echo number_format($grandTotal,0);?> &nbsp;</td>

@@ -45,7 +45,6 @@
 						}else if($row['statusFlow'] == 'in'){
 							$amountIn = getCashIn($id);
 							echo number_format($amountIn,2);
-							
 						}
 					?></td>
 					<td><?php echo number_format($latestBalance,2);?></td>

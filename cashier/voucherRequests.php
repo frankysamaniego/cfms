@@ -30,8 +30,46 @@
 	<div class="w3-bar w3-white">
     <button class="w3-bar-item w3-button tablink w3-blue" onclick="openCity(event,'approved')">Approved</button>
     <button class="w3-bar-item w3-button tablink " onclick="openCity(event,'pending')">Pending <span  class="notifData w3-small w3-badge w3-white" id="pendingNotif"></span></button>
+    <button class="w3-bar-item w3-button tablink " onclick="openCity(event,'printed')">Printed </button>
   </div>
   
+ <div id="printed" class="w3-container city" style="display:none">
+	 <div class="w3-row w3-padding-16">
+		<table class="w3-table row-border w3-small stripped" id="printedVoucher">
+			<thead>
+				<tr class="w3-borderbottom">
+					<th>Voucher #</th>
+					<th>Check #</th>
+					<th>Date of Request</th>
+					<th>Payee</th>
+					<th>Type</th>
+					<th>Particulars</th>
+					<th>Total Amount</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+					$query = $mysqli->query("select * from vouchers where requesteeId='$loggedId' and status='0'");
+					while($row = mysqli_fetch_assoc($query)){
+				?>
+				<tr id="todelCancel_<?php echo $row['id']?>">
+					<td><?php echo formatNumber($row['voucherNo']);?></td>
+					<td><?php echo $row['checkNo'];?></td>
+					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
+					<td><?php echo ucwords($row['payee'])?></td>
+					<td><?php echo getVoucherType($row['type'])?></td>
+					<td><?php echo getParticulars($row['id'])?></td>
+					<td><?php echo getParticularsTotal($row['id'])?></td>
+					<td class="w3-center">
+						<a href="javascript:void(0)" class="w3-text-red" onclick="cancelVoucher(<?php echo $row['id']?>)" alt="Cancel" title="Cancel"><i class="fa fa-remove"></i></a>
+					</td>
+				</tr>
+				<?php }?>
+			</tbody>
+		</table>
+	</div>
+ </div>
   <div id="pending" class="w3-container city" style="display:none">
     <div class="w3-row w3-padding-16">
 		<table class="w3-table row-border w3-small stripped" id="requestTables">
@@ -82,7 +120,7 @@
 			</thead>
 			<tbody>
 				<?php
-					$query = $mysqli->query("select * from vouchers where requesteeId='$loggedId' and status='1'");
+					$query = $mysqli->query("select * from vouchers where requesteeId='$loggedId' and status='1' and checkNo=''");
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
