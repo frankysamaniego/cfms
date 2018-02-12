@@ -11,6 +11,7 @@
 		$initialBudget=$_GET['initBudget'];
 		$projectPass = $_GET['projectPass'];
 		$projectCost = $_GET['projectCost'];
+		$reqDate = strtotime($startDate);
 		//code to be executed after catching all the data from form
 		$check = $mysqli->query("select * from projects where projectCode='$projectCode' and projectName='$projectName'");
 		$num = mysqli_num_rows($check);
@@ -20,7 +21,15 @@
 			//insert this new project
 			$insert = $mysqli->query("insert into `projects` (projectCode,projectName,projectLocation,projectInCharge,startDate,endDate,projectPass,initialBudget,projectCost,status) values ('$projectCode','$projectName','$projectLoc','$projectInCharge','$startDate','$endDate','$projectPass','$initialBudget','$projectCost','1')") or die(mysqli_error());
 			if($insert){
-				echo "SUCCESS";
+				$lastProjectId = getLastProjId();
+				$insertVoucher = $mysqli->query("insert into `vouchers` (requesteeId,voucherNo,checkNo,requestDate,payee,type,status,vFrom,statusFlow) value ('$lastProjectId','','','$reqDate','SBC Construction','','1','','in')");
+				if($insertVoucher){
+					$lastVoucherId = getLastIdOfVoucher();
+					$insertCashin = $mysqli->query("insert into `cashin` (`voucherId`,`particulars`,`amount`) values ('$lastVoucherId','Project Cash In','$initialBudget')");
+					if($insertCashin){
+						echo "SUCCESS";
+					}
+				}
 			} 
 		}
 	}

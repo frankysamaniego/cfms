@@ -126,7 +126,7 @@
 		$cashInAmount = $_POST['cashInAmount'];
 		$date =getDate();
 		$now = $date[0];
-		$insert  = $mysqli->query("insert into vouchers (requesteeId,voucherNo,checkNo,requestDate,payee,type,status,vFrom,statusFlow) values ('','','','$now','$cashInPayee','','1','','in')");
+		$insert  = $mysqli->query("insert into vouchers (requesteeId,voucherNo,checkNo,requestDate,payee,type,status,vFrom,statusFlow) values ('$cashInProjectId','','','$now','$cashInPayee','','1','','in')");
 		if($insert){
 			$lastVoucher =getLastIdOfVoucher();
 			$insertToCashIn = $mysqli->query("insert into cashin (voucherId,particulars,amount) values ('$lastVoucher','$cashInProjectId','$cashInAmount')");

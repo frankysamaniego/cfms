@@ -61,7 +61,6 @@
 		<table class="w3-table row-border w3-small stripped" id="requestTables">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Voucher No.</th>
 					<th>Date of Request</th>
 					<th>Payee</th>
 					<th>Type</th>
@@ -76,7 +75,6 @@
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
-					<td><?php echo $row['voucherNo'];?></td>
 					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
 					<td><?php echo getVoucherType($row['type'])?></td>
@@ -129,7 +127,6 @@
 		<table class="w3-table row-border w3-small" class="approvedTable" id="declinedData">
 			<thead>
 				<tr class="w3-borderbottom">
-					<th>Voucher No.</th>
 					<th>Date of Request</th>
 					<th>Payee</th>
 					<th>Type</th>
@@ -143,7 +140,6 @@
 					while($row = mysqli_fetch_assoc($query)){
 				?>
 				<tr id="todelCancel_<?php echo $row['id']?>">
-					<td><?php echo $row['voucherNo'];?></td>
 					<td><?php echo date('m/d/Y',$row['requestDate']);?></td>
 					<td><?php echo ucwords($row['payee'])?></td>
 					<td><?php echo getVoucherType($row['type'])?></td>

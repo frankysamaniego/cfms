@@ -107,13 +107,7 @@
 	
 	//print_r($_GET);
 	$voucherId = hexdec($_GET['voucherid']);
-	function formatNumber($x){
-		$d = getDate();
-		$now = $d[0];
-		$month = date('m',$now);
-		$formattedNum = $month.''.sprintf('%08d', $x);
-		return $formattedNum;
-	}
+	
 	
 	$sql = $mysqli->query("select * from vouchers where id='$voucherId' and type='{$_GET['voucherType']}' and status ='1'");
 	while($row = mysqli_fetch_assoc($sql)){

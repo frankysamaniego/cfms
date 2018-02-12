@@ -202,6 +202,8 @@
 							require('vouchersReq.php');
 						}else if(isset($_GET['companyBal'])){
 							require('companyBal.php');
+						}else if(isset($_GET['cashFlowId'])){
+							require('cashFlowId.php');
 						}else{
 							require('home.php');
 						}

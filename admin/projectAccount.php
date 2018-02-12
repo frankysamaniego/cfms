@@ -65,6 +65,7 @@ function delete_(x,id){
 			<thead>
 				<tr class="w3-bottombar w3-hover" style="font-weight:bold;">
 					<th>Project Code</th>
+					<th>Password</th>
 					<th>Project Location</th>
 					<th>In-Charge</th>
 					<th>Account Status</th>
@@ -77,7 +78,8 @@ function delete_(x,id){
 					while($row = mysqli_fetch_assoc($sql)){
 				?>
 				<tr id="trDel_<?php echo $row['id']?>">
-					<td><?php echo $row['projectCode'];?></td>
+					<td><a href="?cashFlowId=<?php echo $row['id'];?>"><?php echo $row['projectCode'];?></a></td>
+					<td><?php echo $row['projectPass'];?></td>
 					<td><?php echo $row['projectLocation'];?></td>
 					<td><?php echo $row['projectInCharge'];?></td>
 					<td id="tdToggle_<?php echo $row['id'];?>"><?php echo getProjStatus($row['status']);?></td>

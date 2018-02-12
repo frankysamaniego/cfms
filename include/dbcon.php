@@ -21,7 +21,13 @@
 		return $stat;
 	}
 	
-	
+	function formatNumber($x){
+		$d = getDate();
+		$now = $d[0];
+		$month = date('m',$now);
+		$formattedNum = $month.''.sprintf('%08d', $x);
+		return $formattedNum;
+	}
 	
 	
 	function getProjectCode($x){
@@ -68,7 +74,14 @@
 					}
 				echo "</ul>";
 		}else{
-			 getProjParticulars($x);
+			$sql = $mysqli->query("select * from cashin where voucherId='$x'");
+			if(mysqli_num_rows($sql) > 0){
+				while($row = mysqli_fetch_assoc($sql)){
+					return $row['particulars'];
+				}
+			}else{
+				getProjParticulars($x);
+			}
 		}
 	}
 	function getProjParticulars($x){
@@ -186,6 +199,19 @@
 	
 	function getLatestBal(){
 		global $mysqli;
+		$totalBal = 0;
+		$sql = $mysqli->query("select * from balance order by id desc limit 1");
+		while($row = mysqli_fetch_assoc($sql)){
+			$totalBal = $totalBal + $row['balance'];
+		}
+		$query = $mysqli->query("select * from projects");
+		while($r = mysqli_fetch_assoc($query)){
+			$totalBal = $totalBal + $r['initialBudget'];
+		}
+		return $totalBal;
+	}
+	function getCompBal(){
+		global $mysqli;
 		$sql = $mysqli->query("select * from balance order by id desc limit 1");
 		while($row = mysqli_fetch_assoc($sql)){
 			return $row['balance'];
@@ -196,6 +222,14 @@
 		$sql = $mysqli->query("select * from balance order by id desc limit 1");
 		while($row = mysqli_fetch_assoc($sql)){
 			return $row['dateupdated'];
+		}
+	}
+	
+	function getLastProjId(){
+		global $mysqli;
+		$sql = $mysqli->query("select * from projects order by id desc limit 1");
+		while($row = mysqli_fetch_assoc($sql)){
+			return $row['id'];
 		}
 	}
 ?>

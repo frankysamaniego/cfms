@@ -42,7 +42,11 @@
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-			  document.getElementById("status").innerHTML=this.responseText;
+			 // document.getElementById("status").innerHTML=this.responseText;
+			  if(this.responseText == "SUCCESS"){
+				  alert("Project Added");
+				  window.location.reload();
+			  }
 			  console.log(this.responseText);
 			}
 		  };
